@@ -4,6 +4,7 @@ import { Counter } from './components/counter/Counter';
 import './App.css';
 import {Streetview} from "./components/streetview/Streetview";
 import { useQuery, gql } from "@apollo/client";
+import {CountryTable} from "./components/country-table/CountryTable";
 
 function App() {
   const COUNTRY_QUERY = gql`
@@ -68,7 +69,7 @@ function App() {
       </header>
 
       <div>
-        <Streetview />
+        <CountryTable countries={data} />
       </div>
     </div>
   );

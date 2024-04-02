@@ -1,0 +1,11 @@
+.tableContainer {
+  height: 50vh;
+}
+
+.tableRow {
+  margin: 0;
+}
+
+.tableCell {
+  padding: 8px;
+}
