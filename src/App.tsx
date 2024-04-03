@@ -52,7 +52,7 @@ function App() {
     <div className="App">
       <div className="App-header">
         <h1>
-          Yolo Group Challenge for Frontend Developer
+          Hub88 Group Challenge for Frontend Developer
         </h1>
         <h2>
           Challenge done by João Loureiro

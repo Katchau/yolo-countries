@@ -11,7 +11,8 @@ interface CountryTableProps extends CountryQueryResult{
 export function CountryTable({countries, filter = ""}: CountryTableProps) {
 
   function TableBody() {
-    const filterReg = new RegExp(filter, "i");
+    // removing special characters, keeps underscores and spaces just in case 
+    const filterReg = new RegExp(filter.replace(/[^\w\s]/gi, ''), "i");
 
     return (
       countries.map((country, index) => {
