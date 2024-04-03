@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   background: radial-gradient(circle, rgba(0,198,255,1) 0%, rgba(0,159,255,1) 50%);
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .App-header {
@@ -20,4 +20,30 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.App-body-wrapper {
+  width: var(--country-table-width);
+}
+
+.inputArea span {
+  color: ghostwhite;
+  font-weight: bold;
+}
+
+.inputArea input {
+  color: darkblue;
+  border: 1px black solid;
+  border-radius: 4px;
+}
+
+.inputArea input:focus {
+  border: 1px darkblue solid;
+}
+
+@media only screen and (max-width: 700px) {
+  .App-body-wrapper {
+    max-width: var(--country-table-width);
+    width: 80%;
+  }
 }

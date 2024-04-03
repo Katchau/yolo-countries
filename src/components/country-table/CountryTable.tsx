@@ -50,14 +50,14 @@ export function CountryTable({countries, filter = ""}: CountryTableProps) {
       </tr>
       </thead>
       <tbody className={styles.tableBody}>
-      {countries.length > 0 ?
-        TableBody() :
-        <tr className={styles.row}>
+        {!!countries &&
+          TableBody()
+        }
+        <tr className={[styles.row, styles.defaultState].join(" ")}>
           <td>
             No country data available
           </td>
         </tr>
-      }
       </tbody>
     </table>
   );
