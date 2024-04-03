@@ -1,20 +1,52 @@
 .tableContainer {
-  display: flex;
-  align-content: center;
-  justify-content: center;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: 10% 90%;
+
   width: 500px;
   height: 50vh;
+
+  background: white;
+  margin: 16px 0;
+  border-radius: 8px;
+  border: 2px darkblue solid;
+}
+
+.tableHead {
+  display: grid;
+  padding: 0 8px;
+  border-bottom: 1px solid darkblue;
 }
 
 .tableBody {
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
-.tableRow {
-  margin: 0;
+.tableBody .row {
+  padding: 8px 16px;
+  /** hack to have the scrollbar not shift stuff */
+  margin-right: calc(-1 * (500px - 100%))
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
 .tableCell {
-  padding: 8px;
+  height: fit-content;
+  align-self: center;
+}
+
+.code {
+  justify-self: center;
+  margin-right: -16px;
+}
+
+.countryName {
+  display: flex;
+}
+
+.countryName span {
+  margin-left: 8px;
 }

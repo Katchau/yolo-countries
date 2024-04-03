@@ -14,11 +14,15 @@ function App() {
     // simple timeout and clear timeout would also work
     const debouncedOnChange = debounce((event: ChangeEvent<HTMLInputElement>) => {
       event.preventDefault();
-      console.log("dafuq")
       setInputText(event.target.value);
     }, 100);
 
-    return <input type="text" onChange={debouncedOnChange} disabled={!!requestError || loading} />
+    return (
+      <div className="inputArea">
+        <span>Country filter input </span>
+        <input type="text" onChange={debouncedOnChange} disabled={!!requestError || loading} placeholder="country name"/>
+      </div>
+    )
   }
 
   function CountryBody() {
@@ -50,17 +54,19 @@ function App() {
         <h1>
           Yolo Group Challenge for Frontend Developer
         </h1>
-        <h3>
+        <h2>
           Challenge done by João Loureiro
-        </h3>
+        </h2>
       </div>
       <div className="App-body">
-        {
-          CountryInput()
-        }
-        {
-          CountryBody()
-        }
+        <div className="App-body-wrapper">
+          {
+            CountryInput()
+          }
+          {
+            CountryBody()
+          }
+        </div>
       </div>
     </div>
   );

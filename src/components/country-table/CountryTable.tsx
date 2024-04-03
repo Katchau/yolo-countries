@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 
 import styles from './CountryTable.module.css';
 import ReactCountryFlag from "react-country-flag";
@@ -16,8 +16,8 @@ export function CountryTable({countries, filter = ""}: CountryTableProps) {
     return (
       countries.map((country, index) => {
         return (filterReg.test(country.name) &&
-          <tr key={index}>
-            <td>
+          <tr key={index} className={styles.row}>
+            <td className={[styles.tableCell, styles.countryName].join(" ")}>
               <ReactCountryFlag
                 countryCode={country.code}
                 svg
@@ -26,9 +26,9 @@ export function CountryTable({countries, filter = ""}: CountryTableProps) {
                   lineHeight: '2rem',
                 }}
               />
-              {country.name}
+              <span>{country.name}</span>
             </td>
-            <td>
+            <td className={[styles.tableCell, styles.code].join(" ")}>
               {country.code}
             </td>
           </tr>
@@ -39,20 +39,20 @@ export function CountryTable({countries, filter = ""}: CountryTableProps) {
 
   return (
     <table className={styles.tableContainer}>
-      <thead>
-      <tr>
-        <th>
-          Country Name
-        </th>
-        <th>
-          Country Code
-        </th>
+      <thead className={styles.tableHead}>
+        <tr className={styles.row}>
+          <th className={styles.tableCell}>
+            Country Name
+          </th>
+          <th className={styles.tableCell}>
+            Country Code
+          </th>
       </tr>
       </thead>
       <tbody className={styles.tableBody}>
       {countries.length > 0 ?
         TableBody() :
-        <tr>
+        <tr className={styles.row}>
           <td>
             No country data available
           </td>
