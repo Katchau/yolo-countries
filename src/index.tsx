@@ -1,10 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { Provider } from 'react-redux';
-import { store } from './store/store';
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import App from './App';
-import reportWebVitals from './reportWebVitals';
 import './index.css';
 
 const apolloClient = new ApolloClient({
@@ -18,18 +15,10 @@ const root = createRoot(container);
 root.render(
   <React.StrictMode>
     <ApolloProvider client={apolloClient}>
-      <Provider store={store}>
-        <App />
-      </Provider>
+      <App />
     </ApolloProvider>
   </React.StrictMode>
 );
-
-// If you want to start measuring performance in your store, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
-
 
 /**
  *
