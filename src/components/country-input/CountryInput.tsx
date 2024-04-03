@@ -1,6 +1,6 @@
 import { debounce } from "lodash";
 import styles from './CountryInput.module.css';
-import React, {ChangeEvent, useState} from "react";
+import React, {ChangeEvent} from "react";
 import { useAppDispatch } from "../../store/hooks";
 import { update } from "../../store/slices/slices";
 

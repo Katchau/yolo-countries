@@ -1,6 +1,5 @@
-import React, {ChangeEvent, useEffect, useState} from 'react';
+import React from 'react';
 import './App.css';
-import { debounce } from "lodash";
 import { CountryTable } from "./components/country-table/CountryTable";
 import { GetCountryQuery } from "./service/country-service";
 import { useAppSelector } from "./store/hooks";

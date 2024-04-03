@@ -23,13 +23,3 @@ root.render(
     </ApolloProvider>
   </React.StrictMode>
 );
-
-/**
- *
- *  Got this error once, just putting this here JIC
- *
- *   "devDependencies": {
- *     "@babel/plugin-proposal-private-property-in-object": "7.21.0"
- *   },
- *
- * */
