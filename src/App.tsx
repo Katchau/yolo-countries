@@ -9,16 +9,12 @@ function App() {
 
   const { data, error: requestError, loading } = GetCountryQuery();
 
-  useEffect(()=>{
-    console.log("yooo", inputText);
-    console.log("wtf", data?.countries, loading);
-  });
-
   const CountryInput = () => {
 
     // simple timeout and clear timeout would also work
     const debouncedOnChange = debounce((event: ChangeEvent<HTMLInputElement>) => {
       event.preventDefault();
+      console.log("dafuq")
       setInputText(event.target.value);
     }, 100);
 
@@ -45,11 +41,12 @@ function App() {
         <CountryTable countries={data.countries} filter={inputText} />
       );
     }
+    return <></>
   }
 
   return (
     <div className="App">
-      <div className="">
+      <div className="App-header">
         <h1>
           Yolo Group Challenge for Frontend Developer
         </h1>
@@ -57,13 +54,9 @@ function App() {
           Challenge done by João Loureiro
         </h3>
       </div>
-      <div>
-        {
-          CountryInput()
-        }
-        {
-          CountryBody()
-        }
+      <div className="App-body">
+        <CountryInput />
+        <CountryBody />
       </div>
     </div>
   );

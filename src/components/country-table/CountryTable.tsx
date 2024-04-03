@@ -49,7 +49,7 @@ export function CountryTable({countries, filter = ""}: CountryTableProps) {
         </th>
       </tr>
       </thead>
-      <tbody>
+      <tbody className={styles.tableBody}>
       {countries.length > 0 ?
         TableBody() :
         <tr>

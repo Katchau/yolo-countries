@@ -1,5 +1,14 @@
 .tableContainer {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 500px;
   height: 50vh;
+}
+
+.tableBody {
+  overflow: auto;
 }
 
 .tableRow {
