@@ -1,75 +1,69 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './components/counter/Counter';
+import React, {ChangeEvent, useEffect, useState} from 'react';
 import './App.css';
-import {Streetview} from "./components/streetview/Streetview";
-import { useQuery, gql } from "@apollo/client";
-import {CountryTable} from "./components/country-table/CountryTable";
+import { debounce } from "lodash";
+import { CountryTable } from "./components/country-table/CountryTable";
+import { GetCountryQuery } from "./service/country-service";
 
 function App() {
-  const COUNTRY_QUERY = gql`
-    query GetCountries {
-      countries {
-      code
-      emoji
-      name
+  const [inputText, setInputText] = useState("");
+
+  const { data, error: requestError, loading } = GetCountryQuery();
+
+  useEffect(()=>{
+    console.log("yooo", inputText);
+    console.log("wtf", data?.countries, loading);
+  });
+
+  const CountryInput = () => {
+
+    // simple timeout and clear timeout would also work
+    const debouncedOnChange = debounce((event: ChangeEvent<HTMLInputElement>) => {
+      event.preventDefault();
+      setInputText(event.target.value);
+    }, 100);
+
+    return <input type="text" onChange={debouncedOnChange} disabled={!!requestError || loading} />
+  }
+
+  function CountryBody() {
+    if (requestError) {
+      console.log("request error", requestError);
+      return (
+        <div>
+          <h3>There was an error retrieving country data</h3>
+          <p>{requestError.message}</p>
+        </div>
+      );
+    }
+    if (loading) {
+      return (
+        <h3>Loading...</h3>
+      );
+    }
+    if (data) {
+      return (
+        <CountryTable countries={data.countries} filter={inputText} />
+      );
     }
   }
- `;
-
-  const { data } = useQuery(COUNTRY_QUERY);
-  console.log("hmm", data);
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-
+      <div className="">
+        <h1>
+          Yolo Group Challenge for Frontend Developer
+        </h1>
+        <h3>
+          Challenge done by João Loureiro
+        </h3>
+      </div>
       <div>
-        <CountryTable countries={data} />
+        {
+          CountryInput()
+        }
+        {
+          CountryBody()
+        }
       </div>
     </div>
   );

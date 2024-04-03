@@ -1,36 +1,32 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 
-import { useAppSelector, useAppDispatch } from '../../store/hooks';
-import {
-  decrement,
-  increment,
-  incrementByAmount,
-  incrementAsync,
-  incrementIfOdd,
-  selectCount,
-} from '../../store/slices/counter/counterSlice';
-import styles from './CountryTable..module.css';
+import styles from './CountryTable.module.css';
 import ReactCountryFlag from "react-country-flag";
+import { CountryQueryResult } from "../../types/types";
 
-interface CountryData {
-  name: string,
-  code: string,
-  emoji: string
+// It's reusable but in normal cases you should just have the prop countries: CountryData[]
+interface CountryTableProps extends CountryQueryResult{
+  filter?: string
 }
+export function CountryTable({countries, filter = ""}: CountryTableProps) {
 
-export interface TableProps {
-  countries: CountryData[],
-}
-
-export function CountryTable({countries}: TableProps) {
   function TableBody() {
+    const filterReg = new RegExp(filter, "i");
 
     return (
       countries.map((country, index) => {
-        return (
-          <tr tabIndex={index}>
+        return (filterReg.test(country.name) &&
+          <tr key={index}>
             <td>
-              <ReactCountryFlag countryCode={country.emoji} /> {country.name}
+              <ReactCountryFlag
+                countryCode={country.code}
+                svg
+                style={{
+                  fontSize: '2rem',
+                  lineHeight: '2rem',
+                }}
+              />
+              {country.name}
             </td>
             <td>
               {country.code}
@@ -54,9 +50,13 @@ export function CountryTable({countries}: TableProps) {
       </tr>
       </thead>
       <tbody>
-      {countries.length ?
-          TableBody() :
-          <p>Loading...</p>
+      {countries.length > 0 ?
+        TableBody() :
+        <tr>
+          <td>
+            No country data available
+          </td>
+        </tr>
       }
       </tbody>
     </table>
