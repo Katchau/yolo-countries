@@ -55,8 +55,12 @@ function App() {
         </h3>
       </div>
       <div className="App-body">
-        <CountryInput />
-        <CountryBody />
+        {
+          CountryInput()
+        }
+        {
+          CountryBody()
+        }
       </div>
     </div>
   );
