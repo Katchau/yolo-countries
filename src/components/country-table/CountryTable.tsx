@@ -15,7 +15,7 @@ export function CountryTable({countries, filter = ""}: CountryTableProps) {
 
     return (
       countries.map((country, index) => {
-        return (filterReg.test(country.name) &&
+        return (filterReg.test(country.code) &&
           <tr key={index} className={styles.row}>
             <td className={[styles.tableCell, styles.countryName].join(" ")}>
               <ReactCountryFlag

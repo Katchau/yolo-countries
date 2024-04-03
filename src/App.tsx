@@ -20,7 +20,7 @@ function App() {
     return (
       <div className="inputArea">
         <span>Country filter input </span>
-        <input type="text" onChange={debouncedOnChange} disabled={!!requestError || loading} placeholder="country name"/>
+        <input type="text" onChange={debouncedOnChange} disabled={!!requestError || loading} placeholder="country code"/>
       </div>
     )
   }
