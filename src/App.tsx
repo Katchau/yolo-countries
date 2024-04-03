@@ -3,28 +3,16 @@ import './App.css';
 import { debounce } from "lodash";
 import { CountryTable } from "./components/country-table/CountryTable";
 import { GetCountryQuery } from "./service/country-service";
+import { useAppSelector } from "./store/hooks";
+import {selectFilter} from "./store/slices/slices";
+import {CountryInput} from "./components/country-input/CountryInput";
 
 function App() {
-  const [inputText, setInputText] = useState("");
+  const inputText = useAppSelector(selectFilter);
 
   const { data, error: requestError, loading } = GetCountryQuery();
 
-  const CountryInput = () => {
-
-    // simple timeout and clear timeout would also work
-    const debouncedOnChange = debounce((event: ChangeEvent<HTMLInputElement>) => {
-      event.preventDefault();
-      setInputText(event.target.value);
-    }, 100);
-
-    return (
-      <div className="inputArea">
-        <span>Country filter input </span>
-        <input type="text" onChange={debouncedOnChange} disabled={!!requestError || loading} placeholder="country code"/>
-      </div>
-    )
-  }
-
+  // like the country input, this could've also been a different component
   function CountryBody() {
     if (requestError) {
       console.log("request error", requestError);
@@ -60,9 +48,7 @@ function App() {
       </div>
       <div className="App-body">
         <div className="App-body-wrapper">
-          {
-            CountryInput()
-          }
+          <CountryInput isDisabled={loading || !!requestError} />
           {
             CountryBody()
           }

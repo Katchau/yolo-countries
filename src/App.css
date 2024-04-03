@@ -26,21 +26,6 @@
   width: var(--country-table-width);
 }
 
-.inputArea span {
-  color: ghostwhite;
-  font-weight: bold;
-}
-
-.inputArea input {
-  color: darkblue;
-  border: 1px black solid;
-  border-radius: 4px;
-}
-
-.inputArea input:focus {
-  border: 1px darkblue solid;
-}
-
 @media only screen and (max-width: 700px) {
   .App-body-wrapper {
     max-width: var(--country-table-width);

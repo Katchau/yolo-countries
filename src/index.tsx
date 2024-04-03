@@ -3,6 +3,8 @@ import { createRoot } from 'react-dom/client';
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import App from './App';
 import './index.css';
+import {Provider} from "react-redux";
+import {store} from "./store/store";
 
 const apolloClient = new ApolloClient({
   uri: "https://countries.trevorblades.com/",
@@ -15,7 +17,9 @@ const root = createRoot(container);
 root.render(
   <React.StrictMode>
     <ApolloProvider client={apolloClient}>
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </ApolloProvider>
   </React.StrictMode>
 );
